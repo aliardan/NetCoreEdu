@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,12 +11,12 @@ namespace Workers
     public class Directory
     {
         private readonly string _path;
-        private readonly Dictionary<CacheKey, CacheRecord> _cache;
+        private readonly ConcurrentDictionary<CacheKey, CacheRecord> _cache;
 
         public Directory(string path)
         {
             _path = path;
-            _cache = new Dictionary<CacheKey, CacheRecord>();
+            _cache = new ConcurrentDictionary<CacheKey, CacheRecord>();
         }
 
         private IEnumerable<string> GetFilesOfSubTree(string subPath, string fileFormat)
@@ -33,8 +34,8 @@ namespace Workers
                 var files = System.IO.Directory.GetFiles(subPath, "*"+fileFormat);
                 result.AddRange(files);
 
-                var diretories = System.IO.Directory.GetDirectories(subPath);
-                foreach (string directory in diretories)
+                var directories = System.IO.Directory.GetDirectories(subPath);
+                foreach (string directory in directories)
                 {
                     result.AddRange(GetFilesOfSubTree(directory, fileFormat));
                 }

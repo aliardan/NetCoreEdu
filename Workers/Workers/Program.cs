@@ -14,8 +14,6 @@ namespace Workers
             bworker.DoWork += PrintAllFiles;
             bworker.RunWorkerAsync(".txt");
 
-            Console.WriteLine("Hello World!");
-
             Console.ReadKey();
         }
 
