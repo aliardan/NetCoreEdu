@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,34 +10,60 @@ namespace Workers
     public class Directory
     {
         private readonly string _path;
+        private readonly Dictionary<CacheKey, CacheRecord> _cache;
 
         public Directory(string path)
         {
             _path = path;
+            _cache = new Dictionary<CacheKey, CacheRecord>();
         }
 
-        private IEnumerable<string> GetFilesOfSubTree(string subPath)
+        private IEnumerable<string> GetFilesOfSubTree(string subPath, string fileFormat)
         {
-            List<string> result = new List<string>();
+            CacheKey key = new CacheKey{SubDirectory = subPath, FileFormat = fileFormat};
 
-            var files = System.IO.Directory.GetFiles(subPath);
-            result.AddRange(files);
-
-            var diretories = System.IO.Directory.GetDirectories(subPath);
-            foreach (string directory in diretories)
+            if (_cache.ContainsKey(key) && (DateTime.Now - _cache[key].TimeStamp) < TimeSpan.FromMinutes(5))
             {
-                result.AddRange(GetFilesOfSubTree(directory));
+                return _cache[key].Files;
             }
+            else
+            {
+                List<string> result = new List<string>();
 
-            return result;
+                var files = System.IO.Directory.GetFiles(subPath, "*"+fileFormat);
+                result.AddRange(files);
+
+                var diretories = System.IO.Directory.GetDirectories(subPath);
+                foreach (string directory in diretories)
+                {
+                    result.AddRange(GetFilesOfSubTree(directory, fileFormat));
+                }
+
+                _cache[key] = new CacheRecord(){ Files = result, TimeStamp = DateTime.Now};
+
+                return result;
+            }
         }
 
         public IEnumerable<string> GetFiles(string format)
         {
-            var mainFiles = GetFilesOfSubTree(_path);
-            var result = mainFiles.Where(x => System.IO.Path.GetExtension(x) == format);
-
+            var result = GetFilesOfSubTree(_path, format);
             return result;
+        }
+
+        private struct CacheRecord
+        {
+            public DateTime TimeStamp;
+            public IEnumerable<string> Files;
+        }
+
+        private struct CacheKey
+        {
+            /// <summary>
+            /// Absolute path
+            /// </summary>
+            public string SubDirectory;
+            public string FileFormat;
         }
     }
 }
