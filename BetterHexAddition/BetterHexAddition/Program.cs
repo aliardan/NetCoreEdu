@@ -6,8 +6,8 @@ namespace BetterHexAddition
     {
         static void Main(string[] args)
         {
-            var first = "11";
-            var second = "11";
+            var first = "bc614e";
+            var second = "343efcea";
 
             var result = Sum(first, second);
 
