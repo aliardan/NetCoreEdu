@@ -1,29 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FileRepository
 {
     internal class FileRepository : IFileRepository
     {
-        public Task<File> GetByIdAsync(Guid id)
+        private readonly TextDataBaseContext _textDataBaseContext;
+
+        public FileRepository(TextDataBaseContext textDataBaseContext)
         {
-            throw new NotImplementedException();
+            _textDataBaseContext = textDataBaseContext;
         }
 
-        public Task<IEnumerable<File>> GetAllAsync()
+        public async Task<File> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+           return await _textDataBaseContext.Files.Where(x => x.Id == id).FirstAsync();
         }
 
-        public Task<File> CreateAsync(File entity)
+        public async Task<IEnumerable<File>> GetAllAsync()
         {
-            return Task.FromResult(new File("","", Guid.NewGuid()));
+            return await _textDataBaseContext.Files.ToListAsync();
         }
 
-        public Task<IEnumerable<File>> CreateMany(IEnumerable<File> entities)
+        public async Task<File> CreateAsync(File entity)
+        { 
+            await _textDataBaseContext.Files.AddAsync(entity);
+            return entity;
+        }
+
+        public async Task<IEnumerable<File>> CreateMany(IEnumerable<File> entities)
         {
-            throw new NotImplementedException();
+            await _textDataBaseContext.Files.AddRangeAsync(entities);
+            return entities;
         }
 
         public Task<bool> Update(File entity)
