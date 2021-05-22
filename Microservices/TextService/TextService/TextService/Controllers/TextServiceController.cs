@@ -25,6 +25,11 @@ namespace TextService.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+        /// <summary>
+        /// Create a new text document on the server
+        /// </summary>
+        /// <param name="fileName">The name of the file</param>
+        /// <returns></returns>
         [HttpPost("[controller]")]
         public async Task<ActionResult<Guid>> Save([FromQuery] string fileName)
         {
