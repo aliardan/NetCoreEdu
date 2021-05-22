@@ -33,36 +33,37 @@ namespace FileRepository
 
         public async Task<IEnumerable<File>> CreateMany(IEnumerable<File> entities)
         {
-            await _textDataBaseContext.Files.AddRangeAsync(entities);
-            return entities;
+            var entitiesList = entities.ToList();
+            await _textDataBaseContext.Files.AddRangeAsync(entitiesList);
+            return entitiesList;
         }
 
-        public Task<bool> Update(File entity)
+        public async Task<bool> Update(File entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateMany(IEnumerable<File> entities)
+        public async Task<bool> UpdateMany(IEnumerable<File> entities)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(Guid id)
+        public async Task<bool> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteMany(IEnumerable<Guid> id)
+        public async Task<bool> DeleteMany(IEnumerable<Guid> id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Restore(Guid id)
+        public async Task<bool> Restore(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> RestoreMany(IEnumerable<Guid> id)
+        public async Task<bool> RestoreMany(IEnumerable<Guid> id)
         {
             throw new NotImplementedException();
         }
