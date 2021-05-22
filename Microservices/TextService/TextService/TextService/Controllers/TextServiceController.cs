@@ -25,8 +25,8 @@ namespace TextService.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [HttpPost("/{fileName}")]
-        public async Task<ActionResult<Guid>> Save([FromRoute][DefaultValue("asdasd")] string fileName)
+        [HttpPost("[controller]")]
+        public async Task<ActionResult<Guid>> Save([FromQuery] string fileName)
         {
             using var reader = new StreamReader(HttpContext.Request.Body, Encoding.UTF8);
             string content = await reader.ReadToEndAsync();
@@ -35,18 +35,18 @@ namespace TextService.Controllers
             return new ActionResult<Guid>(file.Id);
         }
 
-        [HttpPost("/{fileName}/SaveFromString")]
-        public async Task<ActionResult<Guid>> SaveFromString([FromRoute] string fileName, [FromQuery] string content)
+        [HttpPost("[controller]/SaveFromString")]
+        public async Task<ActionResult<Guid>> SaveFromString([FromQuery] string fileName, [FromQuery] string content)
         {
             var file = new File(content, fileName, Guid.NewGuid());
             await _fileRepository.CreateAsync(file);
             return new ActionResult<Guid>(file.Id);
         }
 
-        [HttpPost("/{fileName}/SaveFromUrl")]
-        public async Task<ActionResult<Guid>> SaveFromUrl([FromRoute] string fileName, [FromQuery] string url)
+        [HttpPost("[controller]/SaveFromUrl")]
+        public async Task<ActionResult<Guid>> SaveFromUrl([FromQuery] string fileName, [FromQuery] string url)
         {
-            using var httpClient = _httpClientFactory.CreateClient("fileFetcher");
+            using var httpClient = _httpClientFactory.CreateClient();
             var content = await httpClient.GetStringAsync(url);
             var file = new File(content, fileName, Guid.NewGuid());
             await _fileRepository.CreateAsync(file);
