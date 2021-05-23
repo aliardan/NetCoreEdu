@@ -28,6 +28,7 @@ namespace TextRepository
         public async Task<Text> CreateAsync(Text entity)
         { 
             await _textDataBaseContext.Files.AddAsync(entity);
+            await _textDataBaseContext.SaveChangesAsync();
             return entity;
         }
 
@@ -35,6 +36,7 @@ namespace TextRepository
         {
             var entitiesList = entities.ToList();
             await _textDataBaseContext.Files.AddRangeAsync(entitiesList);
+            await _textDataBaseContext.SaveChangesAsync();
             return entitiesList;
         }
 
