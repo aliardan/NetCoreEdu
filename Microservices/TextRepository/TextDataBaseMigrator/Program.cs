@@ -1,10 +1,10 @@
 ﻿using System;
-using FileRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using TextRepository;
 
-namespace FileDataBaseMigrator
+namespace TextDataBaseMigrator
 {
     class Program
     {
