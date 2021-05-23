@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FileRepository\FileRepository\FileRepository\FileRepository.csproj" />
+    <ProjectReference Include="..\..\..\FileRepository\FileRepository\FileRepository\TextRepository.csproj" />
   </ItemGroup>
 
 </Project>

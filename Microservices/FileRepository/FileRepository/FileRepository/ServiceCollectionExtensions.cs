@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FileRepository
+namespace TextRepository
 {
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddFileRepository(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddTransient<IFileRepository, FileRepository>();
+            serviceCollection.AddTransient<ITextRepository, TextRepository>();
             return serviceCollection;
         }
     }

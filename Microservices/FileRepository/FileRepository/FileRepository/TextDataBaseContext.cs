@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 [assembly: InternalsVisibleTo("FileDataBaseMigrator")]
-namespace FileRepository
+namespace TextRepository
 {
     internal class TextDataBaseContext : DbContext
     {

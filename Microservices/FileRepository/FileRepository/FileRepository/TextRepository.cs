@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace FileRepository
+namespace TextRepository
 {
-    internal class FileRepository : IFileRepository
+    internal class TextRepository : ITextRepository
     {
         private readonly TextDataBaseContext _textDataBaseContext;
 
-        public FileRepository(TextDataBaseContext textDataBaseContext)
+        public TextRepository(TextDataBaseContext textDataBaseContext)
         {
             _textDataBaseContext = textDataBaseContext;
         }
@@ -38,32 +38,32 @@ namespace FileRepository
             return entitiesList;
         }
 
-        public async Task<bool> Update(Text entity)
+        public Task<bool> Update(Text entity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> UpdateMany(IEnumerable<Text> entities)
+        public Task<bool> UpdateMany(IEnumerable<Text> entities)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> Delete(Guid id)
+        public Task<bool> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> DeleteMany(IEnumerable<Guid> id)
+        public Task<bool> DeleteMany(IEnumerable<Guid> id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> Restore(Guid id)
+        public Task<bool> Restore(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> RestoreMany(IEnumerable<Guid> id)
+        public Task<bool> RestoreMany(IEnumerable<Guid> id)
         {
             throw new NotImplementedException();
         }

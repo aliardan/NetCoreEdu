@@ -13,7 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using FileRepository;
+using TextRepository;
 
 namespace TextService
 {

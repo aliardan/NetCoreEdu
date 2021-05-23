@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextService", "TextService\TextService.csproj", "{EAF47B8C-F5E5-4BD8-B662-8C656B6967E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileRepository", "..\..\FileRepository\FileRepository\FileRepository\FileRepository.csproj", "{AA75272C-CD21-4EDD-B905-3161BFD8C8B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextRepository", "..\..\FileRepository\FileRepository\FileRepository\TextRepository.csproj", "{AA75272C-CD21-4EDD-B905-3161BFD8C8B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryBase", "..\..\RepositoryBase\RepositoryBase\RepositoryBase\RepositoryBase.csproj", "{7C2F60CA-C371-4DB7-804F-79FFBD080047}"
 EndProject
