@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileRepository
 {
-    class TextDataBaseOptions
+    public class TextDataBaseOptions
     {
         public string ConnectionString { get; set; }
     }

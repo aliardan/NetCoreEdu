@@ -1,11 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
+[assembly: InternalsVisibleTo("FileDataBaseMigrator")]
 namespace FileRepository
 {
-    class TextDataBaseContext : DbContext
+    internal class TextDataBaseContext : DbContext
     {
         private readonly string _connectionString;
+
+        [Obsolete("WorkAround for EFCore Migrations generation")]
+        public TextDataBaseContext()
+        {
+            _connectionString = "PlaceHolder";
+        }
 
         public TextDataBaseContext(IOptions<TextDataBaseOptions> options)
         {
@@ -15,15 +25,16 @@ namespace FileRepository
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql(_connectionString);
+            var migrationsAssembly = Assembly.GetExecutingAssembly().GetName().Name;
+            optionsBuilder.UseNpgsql(_connectionString, x => x.MigrationsAssembly(migrationsAssembly));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<File>();
+            modelBuilder.Entity<Text>();
         }
 
-        public DbSet<File> Files { get; set; }
+        public DbSet<Text> Files { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace FileRepository
 {
-    public interface IFileRepository : IRepositoryBase<File>
+    public interface IFileRepository : IRepositoryBase<Text>
     {
     }
 }

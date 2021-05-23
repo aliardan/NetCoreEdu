@@ -15,35 +15,35 @@ namespace FileRepository
             _textDataBaseContext = textDataBaseContext;
         }
 
-        public async Task<File> GetByIdAsync(Guid id)
+        public async Task<Text> GetByIdAsync(Guid id)
         {
            return await _textDataBaseContext.Files.Where(x => x.Id == id).FirstAsync();
         }
 
-        public async Task<IEnumerable<File>> GetAllAsync()
+        public async Task<IEnumerable<Text>> GetAllAsync()
         {
             return await _textDataBaseContext.Files.ToListAsync();
         }
 
-        public async Task<File> CreateAsync(File entity)
+        public async Task<Text> CreateAsync(Text entity)
         { 
             await _textDataBaseContext.Files.AddAsync(entity);
             return entity;
         }
 
-        public async Task<IEnumerable<File>> CreateMany(IEnumerable<File> entities)
+        public async Task<IEnumerable<Text>> CreateMany(IEnumerable<Text> entities)
         {
             var entitiesList = entities.ToList();
             await _textDataBaseContext.Files.AddRangeAsync(entitiesList);
             return entitiesList;
         }
 
-        public async Task<bool> Update(File entity)
+        public async Task<bool> Update(Text entity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> UpdateMany(IEnumerable<File> entities)
+        public async Task<bool> UpdateMany(IEnumerable<Text> entities)
         {
             throw new NotImplementedException();
         }
