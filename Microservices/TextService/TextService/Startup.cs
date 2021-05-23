@@ -31,6 +31,7 @@ namespace TextService
         {
             services.Configure<TextDataBaseOptions>(Configuration.GetSection("TextDataBaseOptions"));
 
+            services.AddTransient<TextService.TextService>();
             services.AddHttpClient();
             services.AddTextRepository();
             services.AddControllers();
