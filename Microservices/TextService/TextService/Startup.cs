@@ -29,10 +29,12 @@ namespace TextService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
-            services.AddFileRepository();
-            services.AddControllers();
+            services.Configure<TextDataBaseOptions>(Configuration.GetSection("TextDataBaseOptions"));
 
+            services.AddHttpClient();
+            services.AddTextRepository();
+            services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
