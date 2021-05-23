@@ -27,32 +27,32 @@ namespace TextService.Controllers
         /// <summary>
         /// Create a new text document on the server
         /// </summary>
-        /// <param name="fileName">The name of the file</param>
+        /// <param name="textName">The name of the file</param>
         /// <returns></returns>
         [HttpPost("[controller]")]
-        public async Task<ActionResult<Guid>> Save([FromQuery] string fileName)
+        public async Task<ActionResult<Guid>> Save([FromQuery] string textName)
         {
             using var reader = new StreamReader(HttpContext.Request.Body, Encoding.UTF8);
             string content = await reader.ReadToEndAsync();
-            var text = new Text(content, fileName, Guid.NewGuid());
+            var text = new Text(content, textName, Guid.NewGuid());
             await _textRepository.CreateAsync(text);
             return new ActionResult<Guid>(text.Id);
         }
 
         [HttpPost("[controller]/SaveFromString")]
-        public async Task<ActionResult<Guid>> SaveFromString([FromQuery] string fileName, [FromQuery] string content)
+        public async Task<ActionResult<Guid>> SaveFromString([FromQuery] string textName, [FromQuery] string content)
         {
-            var text = new Text(content, fileName, Guid.NewGuid());
+            var text = new Text(content, textName, Guid.NewGuid());
             await _textRepository.CreateAsync(text);
             return new ActionResult<Guid>(text.Id);
         }
 
         [HttpPost("[controller]/SaveFromUrl")]
-        public async Task<ActionResult<Guid>> SaveFromUrl([FromQuery] string fileName, [FromQuery] string url)
+        public async Task<ActionResult<Guid>> SaveFromUrl([FromQuery] string textName, [FromQuery] string url)
         {
             using var httpClient = _httpClientFactory.CreateClient();
             var content = await httpClient.GetStringAsync(url);
-            var text = new Text(content, fileName, Guid.NewGuid());
+            var text = new Text(content, textName, Guid.NewGuid());
             await _textRepository.CreateAsync(text);
             return new ActionResult<Guid>(text.Id);
         }
