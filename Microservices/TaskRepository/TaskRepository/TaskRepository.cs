@@ -6,6 +6,7 @@ using Dapper.Contrib.Extensions;
 using FluentMigrator.Builders.Schema.Column;
 using Microsoft.Extensions.Options;
 using RepositoryBase;
+using TaskRepository.Migrations;
 
 namespace TaskRepository
 {
