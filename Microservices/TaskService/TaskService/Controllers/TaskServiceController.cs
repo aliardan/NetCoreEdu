@@ -16,13 +16,17 @@ namespace TaskService.Controllers
         }
 
         [HttpPost("[controller]")]
-        public async Task<ActionResult<Guid>> CreateTask(
-            [FromBody] DateTime startTime,
-            [FromBody] DateTime endTime,
-            [FromBody] int intervalMin,
-            [FromBody] string[] words)
+        public async Task<ActionResult<Guid>> CreateTask([FromBody] TaskApiModel taskApiModel)
         {
-            return await _taskService.CreateTask(startTime, endTime, intervalMin, words);
+            return await _taskService.CreateTask(taskApiModel.StartTime, taskApiModel.EndTime, taskApiModel.IntervalMin, taskApiModel.Words);
+        }
+
+        public class TaskApiModel
+        {
+            public DateTime StartTime { get; set; }
+            public DateTime EndTime { get; set; }
+            public int IntervalMin { get; set; }
+            public string[] Words { get; set; }
         }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
+using RepositoryBase;
 
 namespace TaskService.TaskService
 {
     public class TaskService
     {
-        private readonly TaskRepository.TaskRepository _taskRepository;
+        private readonly IRepositoryBase<TaskRepository.Task> _repositoryBase;
 
-        public TaskService(TaskRepository.TaskRepository taskRepository)
+        public TaskService(IRepositoryBase<TaskRepository.Task> repositoryBase)
         {
-            _taskRepository = taskRepository;
+            _repositoryBase = repositoryBase;
         }
 
         public async Task<Guid> CreateTask(DateTime startTime, DateTime endTime, int intervalMin, string[] words)
@@ -21,11 +22,11 @@ namespace TaskService.TaskService
                 Id = id,
                 StartTime = startTime,
                 EndTime = endTime,
-                Period = intervalMin,
+                Interval = intervalMin,
                 Words = wordString
             };
 
-            await _taskRepository.CreateAsync(task);
+            await _repositoryBase.CreateAsync(task);
             return id;
         }
     }

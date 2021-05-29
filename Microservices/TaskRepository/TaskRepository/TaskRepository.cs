@@ -1,14 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using Dapper;
+using Dapper.Contrib.Extensions;
+using FluentMigrator.Builders.Schema.Column;
+using Microsoft.Extensions.Options;
 using RepositoryBase;
 
 namespace TaskRepository
 {
     public class TaskRepository : IRepositoryBase<Task>
     {
-        public System.Threading.Tasks.Task<Task> CreateAsync(Task entity)
+        private readonly TaskDataBaseOptions _taskDataBaseOptions;
+
+        public TaskRepository(IOptions<TaskDataBaseOptions> taskDataBaseOptions)
         {
-            throw new NotImplementedException();
+            _taskDataBaseOptions = taskDataBaseOptions.Value;
+        }
+
+        public async System.Threading.Tasks.Task<Task> CreateAsync(Task entity)
+        {
+            await using var connection = new SqlConnection(_taskDataBaseOptions.ConnectionString);
+            await connection.InsertAsync(entity);
+            return entity;
         }
 
         public System.Threading.Tasks.Task<IEnumerable<Task>> CreateMany(IEnumerable<Task> entities)
