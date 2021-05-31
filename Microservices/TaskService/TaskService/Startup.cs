@@ -29,6 +29,7 @@ namespace TaskService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.Configure<TaskDataBaseOptions>(Configuration.GetSection("TaskDataBaseOptions"));
             services.AddTransient<IRepositoryBase<TaskRepository.Task>, TaskRepository.TaskRepository>(x => new TaskRepository.TaskRepository(x.GetService<IOptions<TaskDataBaseOptions>>()));
             services.AddTransient<TaskService.TaskService>();

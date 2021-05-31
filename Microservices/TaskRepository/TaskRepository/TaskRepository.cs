@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using Dapper;
 using Dapper.Contrib.Extensions;
@@ -21,8 +22,11 @@ namespace TaskRepository
 
         public async System.Threading.Tasks.Task<Task> CreateAsync(Task entity)
         {
-            await using var connection = new SqlConnection(_taskDataBaseOptions.ConnectionString);
-            await connection.InsertAsync(entity);
+            using (var connection = new SqlConnection(_taskDataBaseOptions.ConnectionString))
+            {
+                await connection.InsertAsync(entity);
+            }
+            
             return entity;
         }
 
@@ -46,9 +50,14 @@ namespace TaskRepository
             throw new NotImplementedException();
         }
 
-        public System.Threading.Tasks.Task<Task> GetByIdAsync(Guid id)
+        public async System.Threading.Tasks.Task<Task> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            await using var connection = new SqlConnection(_taskDataBaseOptions.ConnectionString);
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", id);
+            
+            return await connection.QueryFirstAsync<Task>($"SELECT Id, StartTime, EndTime, Interval, Words, WordsFound FROM dbo.Tasks WHERE Id = @Id", parameters);
         }
 
         public System.Threading.Tasks.Task<bool> Restore(Guid id)

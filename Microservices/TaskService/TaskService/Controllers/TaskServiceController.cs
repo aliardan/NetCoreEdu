@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +17,12 @@ namespace TaskService.Controllers
         public async Task<ActionResult<Guid>> CreateTask([FromBody] TaskApiModel taskApiModel)
         {
             return await _taskService.CreateTask(taskApiModel.StartTime, taskApiModel.EndTime, taskApiModel.IntervalMin, taskApiModel.Words);
+        }
+
+        [HttpGet("[controller]/{id}")]
+        public async Task<ActionResult<int>> GetResult([FromRoute] Guid id)
+        {
+            return await _taskService.GetTaskResult(id);
         }
 
         public class TaskApiModel

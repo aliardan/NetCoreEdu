@@ -15,4 +15,8 @@
     <ProjectReference Include="..\..\TaskRepository\TaskRepository\TaskRepository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

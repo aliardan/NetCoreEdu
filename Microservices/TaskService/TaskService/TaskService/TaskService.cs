@@ -29,5 +29,11 @@ namespace TaskService.TaskService
             await _repositoryBase.CreateAsync(task);
             return id;
         }
+
+        public async Task<int> GetTaskResult(Guid id)
+        {
+            var task = await _repositoryBase.GetByIdAsync(id);
+            return task.WordsFound;
+        }
     }
 }

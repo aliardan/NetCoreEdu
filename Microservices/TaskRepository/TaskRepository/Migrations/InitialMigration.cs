@@ -10,7 +10,7 @@ namespace TaskRepository.Migrations
         {
             Execute.Sql(@"CREATE TABLE dbo.Tasks
             (
-                Id NVARCHAR(200) NOT NULL PRIMARY KEY,
+                Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
                 StartTime DATETIME2 NOT NULL,
                 EndTime DATETIME2 NOT NULL,
                 Interval int NOT NULL,
