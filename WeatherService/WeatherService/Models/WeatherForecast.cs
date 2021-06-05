@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WeatherService.Models
+﻿namespace WeatherService.Models
 {
     /// <summary>
     /// Weather forecast for 5 days

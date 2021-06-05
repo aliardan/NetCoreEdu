@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using WeatherService.Models;
 using WeatherService.WeatherService.Models;
 using JsonSerializer = System.Text.Json.JsonSerializer;
