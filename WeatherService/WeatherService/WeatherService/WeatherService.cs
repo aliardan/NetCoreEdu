@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace WeatherService.WeatherService
             var stringRes = await client.GetStringAsync(url);
             var res = JsonSerializer.Deserialize<WeatherResponce>(stringRes);
 
-            var temp = metric == Metric.Celsius 
+            var temp = metric == Metric.celsius 
                 ? ConvertKelvinToCelsius(res.main.temp) 
                 : ConvertKelvinToFarenheit(res.main.temp);
 
@@ -44,7 +45,19 @@ namespace WeatherService.WeatherService
 
         public async Task<CityWind> GetCityWind(string cityName)
         {
-            throw new NotImplementedException();
+            var client = _httpClientFactory.CreateClient("WeatherClient");
+            var url = $"http://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={_options.APIKEY}";
+            var stringRes = await client.GetStringAsync(url);
+            var res = JsonSerializer.Deserialize<WeatherResponce>(stringRes);
+            
+            var result = new CityWind()
+            {
+                City = cityName,
+                Speed = res.wind.speed,
+                Direction = toTextuallDescription(res.wind.deg)
+            };
+
+            return result;
         }
 
         public async Task<List<WeatherForecast>> GetCityForecast(string cityName, Metric metric)
@@ -58,24 +71,40 @@ namespace WeatherService.WeatherService
             var result = res.list.Select(x => new WeatherForecast()
             {
                 City = cityName,
-                Date = DateTime.Parse(x.dt_txt),
+                Date = DateTime.ParseExact(x.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture).ToString("yyyy-MM-dd"),
                 Metric = metric,
-                Temperature = metric == Metric.Celsius
+                Temperature = metric == Metric.celsius
                     ? ConvertKelvinToCelsius(x.main.temp)
                     : ConvertKelvinToFarenheit(x.main.temp)
             });
 
-            return result.ToList();
+            return result.Where((value, index) => index % 8 == 0).ToList();
         }
 
         private double ConvertKelvinToCelsius(double temperature)
         {
-            return temperature - 273;
+            return Math.Round(temperature - 273.15, 2);
         }
 
         private double ConvertKelvinToFarenheit(double temperature)
         {
-            throw new NotImplementedException();
+            return Math.Round((temperature - 273.15) * 9 / 5 + 32, 2);
+        }
+
+        private Direction toTextuallDescription(double degree)
+        {
+            return degree switch
+            {
+                > 337.5 => Direction.North,
+                > 292.5 => Direction.Northwest,
+                > 247.5 => Direction.West, 
+                > 202.5 => Direction.Southwest,
+                > 157.5 => Direction.South,
+                > 122.5 => Direction.Southeast,
+                > 67.5 => Direction.East,
+                > 22.5 => Direction.Northeast,
+                _ => Direction.North
+            };
         }
     }
 }
