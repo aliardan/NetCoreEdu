@@ -26,7 +26,7 @@ namespace WeatherService.WeatherService
             var client = _httpClientFactory.CreateClient("WeatherClient");
             var url = $"http://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={_options.APIKEY}";
             var stringRes = await client.GetStringAsync(url);
-            var res = JsonSerializer.Deserialize<OpenWeatherForecastResponce>(stringRes);
+            var res = JsonSerializer.Deserialize<WeatherResponce>(stringRes);
 
             var temp = metric == Metric.Celsius 
                 ? ConvertKelvinToCelsius(res.main.temp) 
@@ -49,7 +49,23 @@ namespace WeatherService.WeatherService
 
         public async Task<List<WeatherForecast>> GetCityForecast(string cityName, Metric metric)
         {
-            throw new NotImplementedException();
+            var client = _httpClientFactory.CreateClient("WeatherClient");
+
+            var url = $"http://api.openweathermap.org/data/2.5/forecast?q={cityName}&appid={_options.APIKEY}";
+            var stringRes = await client.GetStringAsync(url);
+            var res = JsonSerializer.Deserialize<ForecastResponce>(stringRes);
+
+            var result = res.list.Select(x => new WeatherForecast()
+            {
+                City = cityName,
+                Date = DateTime.Parse(x.dt_txt),
+                Metric = metric,
+                Temperature = metric == Metric.Celsius
+                    ? ConvertKelvinToCelsius(x.main.temp)
+                    : ConvertKelvinToFarenheit(x.main.temp)
+            });
+
+            return result.ToList();
         }
 
         private double ConvertKelvinToCelsius(double temperature)

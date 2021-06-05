@@ -33,7 +33,7 @@ namespace WeatherService.Controllers
             return await _weatherService.GetCityWind(cityName);
         }
 
-        [HttpGet("[controller]/{cityName}/future/{Metric}")]
+        [HttpGet("[controller]/{cityName}/future/{metric}")]
         public async Task<ActionResult<List<WeatherForecast>>> GetCityForecast(string cityName, string metric)
         {
             if (Enum.TryParse(metric, out Metric parsedMetric))
