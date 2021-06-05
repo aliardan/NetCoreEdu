@@ -16,7 +16,7 @@ namespace WeatherService.Controllers
             _weatherService = weatherService;
         }
 
-        [HttpGet("[controller]/temperature/{cityName}/{Metric}")]
+        [HttpGet("[controller]/temperature/{cityName}/{metric}")]
         public async Task<ActionResult<CityTemperature>> GetCityTemperature(string cityName, string metric)
         {
             if (Enum.TryParse(metric, out Metric parsedMetric))
