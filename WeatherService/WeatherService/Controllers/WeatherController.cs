@@ -9,40 +9,39 @@ namespace WeatherService.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
+        private readonly WeatherService.WeatherService _weatherService;
+
+        public WeatherController(WeatherService.WeatherService weatherService)
+        {
+            _weatherService = weatherService;
+        }
+
         [HttpGet("[controller]/temperature/{cityName}/{Metric}")]
         public async Task<ActionResult<CityTemperature>> GetCityTemperature(string cityName, string metric)
         {
-            Metric parsedMetric;
+            if (Enum.TryParse(metric, out Metric parsedMetric))
+            {
+                return await _weatherService.GetCityTemperature(cityName, parsedMetric);
+            }
 
-            if (Metric.TryParse(metric, out parsedMetric))
-            {
-                throw new NotImplementedException();
-            }
-            else
-            {
-                return new StatusCodeResult(404);
-            }
+            return new StatusCodeResult(404);
         }
 
         [HttpGet("[controller]/wind/{cityName}")]
         public async Task<CityWind> GetCityWind(string cityName)
         {
-            throw new NotImplementedException();
+            return await _weatherService.GetCityWind(cityName);
         }
 
         [HttpGet("[controller]/{cityName}/future/{Metric}")]
         public async Task<ActionResult<List<WeatherForecast>>> GetCityForecast(string cityName, string metric)
         {
-            Metric parsedMetric;
+            if (Enum.TryParse(metric, out Metric parsedMetric))
+            {
+                return  await _weatherService.GetCityForecast(cityName, parsedMetric);
+            }
 
-            if (Metric.TryParse(metric, out parsedMetric))
-            {
-                throw new NotImplementedException();
-            }
-            else
-            {
-                return new StatusCodeResult(404);
-            }
+            return new StatusCodeResult(404);
         }
     }
 }
