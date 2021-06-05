@@ -4,26 +4,18 @@
         <name>WeatherService</name>
     </assembly>
     <members>
-        <member name="T:WeatherService.Controllers.WeatherController">
-            <inheritdoc />
-        </member>
-        <member name="M:WeatherService.Controllers.WeatherController.#ctor(WeatherService.WeatherService.WeatherService)">
-            <inheritdoc />
-        </member>
         <member name="M:WeatherService.Controllers.WeatherController.GetCityTemperature(System.String,System.String)">
             <summary>
             Get the city temperature in celsius/fahrenheit
             </summary>
             <param name="cityName">City name - Moscow</param>
             <param name="metric">Metric in celsius/fahrenheit</param>
-            <returns></returns>
         </member>
         <member name="M:WeatherService.Controllers.WeatherController.GetCityWind(System.String)">
             <summary>
             Get the city wind direction and speed
             </summary>
             <param name="cityName">City name - Moscow</param>
-            <returns></returns>
         </member>
         <member name="M:WeatherService.Controllers.WeatherController.GetCityForecast(System.String,System.String)">
             <summary>
@@ -31,7 +23,6 @@
             </summary>
             <param name="cityName">City name - Moscow</param>
             <param name="metric">Metric in celsius/fahrenheit</param>
-            <returns></returns>
         </member>
         <member name="T:WeatherService.Models.CityTemperature">
             <summary>
@@ -163,9 +154,24 @@
             Weather forecast for 5 days responce
             </summary>
         </member>
-        <member name="P:WeatherService.WeatherService.Models.ListItem.dt_txt">
+        <member name="P:WeatherService.WeatherService.Models.ForecastResponce.List">
+            <summary>
+            Forecast list
+            </summary>
+        </member>
+        <member name="T:WeatherService.WeatherService.Models.ListItem">
+            <summary>
+            List items model
+            </summary>
+        </member>
+        <member name="P:WeatherService.WeatherService.Models.ListItem.DtTxt">
             <summary>
             DateTime
+            </summary>
+        </member>
+        <member name="P:WeatherService.WeatherService.Models.ListItem.Main">
+            <summary>
+            Main part of json model
             </summary>
         </member>
         <member name="T:WeatherService.WeatherService.Models.Main">
@@ -173,9 +179,24 @@
             Main model
             </summary>
         </member>
-        <member name="P:WeatherService.WeatherService.Models.Main.temp">
+        <member name="P:WeatherService.WeatherService.Models.Main.Temp">
             <summary>
             Temperature
+            </summary>
+        </member>
+        <member name="T:WeatherService.WeatherService.Models.WeatherResponce">
+            <summary>
+            Weather Responce model
+            </summary>
+        </member>
+        <member name="P:WeatherService.WeatherService.Models.WeatherResponce.Main">
+            <summary>
+            Main part of json model
+            </summary>
+        </member>
+        <member name="P:WeatherService.WeatherService.Models.WeatherResponce.Wind">
+            <summary>
+            Wind part of json model
             </summary>
         </member>
         <member name="T:WeatherService.WeatherService.Models.Wind">
@@ -183,12 +204,12 @@
             Wind model
             </summary>
         </member>
-        <member name="P:WeatherService.WeatherService.Models.Wind.speed">
+        <member name="P:WeatherService.WeatherService.Models.Wind.Speed">
             <summary>
             Wind speed
             </summary>
         </member>
-        <member name="P:WeatherService.WeatherService.Models.Wind.deg">
+        <member name="P:WeatherService.WeatherService.Models.Wind.Degree">
             <summary>
             Wind degree direction
             </summary>
@@ -206,14 +227,12 @@
             </summary>
             <param name="cityName">City name</param>
             <param name="metric">Metric in celsius/fahrenheit</param>
-            <returns></returns>
         </member>
         <member name="M:WeatherService.WeatherService.WeatherService.GetCityWind(System.String)">
             <summary>
             Get the city wind direction and speed
             </summary>
             <param name="cityName">City name</param>
-            <returns></returns>
         </member>
         <member name="M:WeatherService.WeatherService.WeatherService.GetCityForecast(System.String,WeatherService.Models.Metric)">
             <summary>
@@ -221,7 +240,6 @@
             </summary>
             <param name="cityName">City name</param>
             <param name="metric">Metric in celsius/fahrenheit</param>
-            <returns></returns>
         </member>
         <member name="P:WeatherService.WeatherService.WeatherServiceOptions.APIKEY">
             <summary>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WeatherService.WeatherService.Models
 {
@@ -7,15 +8,28 @@ namespace WeatherService.WeatherService.Models
     /// </summary>
     public class ForecastResponce
     {
-        public List<ListItem> list { get; set; }
+        /// <summary>
+        /// Forecast list
+        /// </summary>
+        [JsonPropertyName("list")]
+        public List<ListItem> List { get; set; }
     }
 
+    /// <summary>
+    /// List items model
+    /// </summary>
     public class ListItem
     {
         /// <summary>
         /// DateTime
         /// </summary>
-        public string dt_txt { get; set; }
-        public Main main { get; set; }
+        [JsonPropertyName("dt_txt")]
+        public string DtTxt { get; set; }
+
+        /// <summary>
+        /// Main part of json model
+        /// </summary>
+        [JsonPropertyName("main")]
+        public Main Main { get; set; }
     }
 }

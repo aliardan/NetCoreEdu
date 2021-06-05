@@ -32,7 +32,6 @@ namespace WeatherService.WeatherService
         /// </summary>
         /// <param name="cityName">City name</param>
         /// <param name="metric">Metric in celsius/fahrenheit</param>
-        /// <returns></returns>
         public async Task<CityTemperature> GetCityTemperature(string cityName, Metric metric)
         {
             var client = _httpClientFactory.CreateClient("WeatherClient");
@@ -41,8 +40,8 @@ namespace WeatherService.WeatherService
             var res = JsonSerializer.Deserialize<WeatherResponce>(stringRes);
 
             var temp = metric == Metric.celsius 
-                ? ConvertKelvinToCelsius(res.main.temp) 
-                : ConvertKelvinToFarenheit(res.main.temp);
+                ? ConvertKelvinToCelsius(res.Main.Temp) 
+                : ConvertKelvinToFarenheit(res.Main.Temp);
 
             var result = new CityTemperature
             {
@@ -58,7 +57,6 @@ namespace WeatherService.WeatherService
         /// Get the city wind direction and speed
         /// </summary>
         /// <param name="cityName">City name</param>
-        /// <returns></returns>
         public async Task<CityWind> GetCityWind(string cityName)
         {
             var client = _httpClientFactory.CreateClient("WeatherClient");
@@ -69,8 +67,8 @@ namespace WeatherService.WeatherService
             var result = new CityWind()
             {
                 City = cityName,
-                Speed = res.wind.speed,
-                Direction = ToTextuallDescription(res.wind.deg)
+                Speed = res.Wind.Speed,
+                Direction = ToDirection(res.Wind.Degree)
             };
 
             return result;
@@ -81,7 +79,6 @@ namespace WeatherService.WeatherService
         /// </summary>
         /// <param name="cityName">City name</param>
         /// <param name="metric">Metric in celsius/fahrenheit</param>
-        /// <returns></returns>
         public async Task<List<WeatherForecast>> GetCityForecast(string cityName, Metric metric)
         {
             var client = _httpClientFactory.CreateClient("WeatherClient");
@@ -90,14 +87,14 @@ namespace WeatherService.WeatherService
             var stringRes = await client.GetStringAsync(url);
             var res = JsonSerializer.Deserialize<ForecastResponce>(stringRes);
 
-            var result = res.list.Select(x => new WeatherForecast()
+            var result = res.List.Select(x => new WeatherForecast()
             {
                 City = cityName,
-                Date = DateTime.ParseExact(x.dt_txt, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture).ToString("yyyy-MM-dd"),
+                Date = DateTime.ParseExact(x.DtTxt, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture).ToString("yyyy-MM-dd"),
                 Metric = metric,
                 Temperature = metric == Metric.celsius
-                    ? ConvertKelvinToCelsius(x.main.temp)
-                    : ConvertKelvinToFarenheit(x.main.temp)
+                    ? ConvertKelvinToCelsius(x.Main.Temp)
+                    : ConvertKelvinToFarenheit(x.Main.Temp)
             });
 
             return result.Where((value, index) => index % 8 == 0).ToList();
@@ -113,7 +110,7 @@ namespace WeatherService.WeatherService
             return Math.Round((temperature - 273.15) * 9 / 5 + 32, 2);
         }
 
-        private Direction ToTextuallDescription(double degree)
+        private Direction ToDirection(double degree)
         {
             return degree switch
             {

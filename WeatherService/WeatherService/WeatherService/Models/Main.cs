@@ -1,4 +1,6 @@
-﻿namespace WeatherService.WeatherService.Models
+﻿using System.Text.Json.Serialization;
+
+namespace WeatherService.WeatherService.Models
 {
     /// <summary>
     /// Main model
@@ -8,6 +10,7 @@
         /// <summary>
         /// Temperature
         /// </summary>
-        public double temp { get; set; }
+        [JsonPropertyName("temp")]
+        public double Temp { get; set; }
     }
 }

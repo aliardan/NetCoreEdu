@@ -6,13 +6,11 @@ using WeatherService.Models;
 
 namespace WeatherService.Controllers
 {
-    /// <inheritdoc />
     [ApiController]
     public class WeatherController : ControllerBase
     {
         private readonly WeatherService.WeatherService _weatherService;
 
-        /// <inheritdoc />
         public WeatherController(WeatherService.WeatherService weatherService)
         {
             _weatherService = weatherService;
@@ -23,7 +21,6 @@ namespace WeatherService.Controllers
         /// </summary>
         /// <param name="cityName">City name - Moscow</param>
         /// <param name="metric">Metric in celsius/fahrenheit</param>
-        /// <returns></returns>
         [HttpGet("[controller]/temperature/{cityName}/{metric}")]
         public async Task<ActionResult<CityTemperature>> GetCityTemperature(string cityName, string metric)
         {
@@ -39,7 +36,6 @@ namespace WeatherService.Controllers
         /// Get the city wind direction and speed
         /// </summary>
         /// <param name="cityName">City name - Moscow</param>
-        /// <returns></returns>
         [HttpGet("[controller]/wind/{cityName}")]
         public async Task<CityWind> GetCityWind(string cityName)
         {
@@ -51,7 +47,6 @@ namespace WeatherService.Controllers
         /// </summary>
         /// <param name="cityName">City name - Moscow</param>
         /// <param name="metric">Metric in celsius/fahrenheit</param>
-        /// <returns></returns>
         [HttpGet("[controller]/{cityName}/future/{metric}")]
         public async Task<ActionResult<List<WeatherForecast>>> GetCityForecast(string cityName, string metric)
         {

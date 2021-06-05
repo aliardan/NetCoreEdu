@@ -1,4 +1,6 @@
-﻿namespace WeatherService.WeatherService.Models
+﻿using System.Text.Json.Serialization;
+
+namespace WeatherService.WeatherService.Models
 {
     /// <summary>
     /// Wind model
@@ -8,11 +10,13 @@
         /// <summary>
         /// Wind speed
         /// </summary>
-        public double speed { get; set; }
+        [JsonPropertyName("speed")]
+        public double Speed { get; set; }
 
         /// <summary>
         /// Wind degree direction
         /// </summary>
-        public double deg { get; set; }
+        [JsonPropertyName("deg")]
+        public double Degree { get; set; }
     }
 }
