@@ -39,7 +39,7 @@ namespace WeatherServiceImplementation
             var stringRes = await client.GetStringAsync(url);
             var res = JsonSerializer.Deserialize<WeatherResponce>(stringRes);
 
-            var temp = metric == Metric.celsius 
+            var temp = metric == Metric.Celsius 
                 ? ConvertKelvinToCelsius(res.Main.Temp) 
                 : ConvertKelvinToFarenheit(res.Main.Temp);
 
@@ -92,7 +92,7 @@ namespace WeatherServiceImplementation
                 City = cityName,
                 Date = DateTime.ParseExact(x.DtTxt, "yyyy-MM-dd HH:mm:ss", CultureInfo.CurrentCulture).ToString("yyyy-MM-dd"),
                 Metric = metric,
-                Temperature = metric == Metric.celsius
+                Temperature = metric == Metric.Celsius
                     ? ConvertKelvinToCelsius(x.Main.Temp)
                     : ConvertKelvinToFarenheit(x.Main.Temp)
             });

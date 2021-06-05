@@ -8,11 +8,11 @@
         /// <summary>
         /// Сelsius Metric
         /// </summary>
-        celsius,
+        Celsius,
 
         /// <summary>
         /// Fahrenheit Metric
         /// </summary>
-        fahrenheit
+        Fahrenheit
     }
 }

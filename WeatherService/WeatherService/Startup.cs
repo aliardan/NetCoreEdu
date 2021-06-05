@@ -27,6 +27,16 @@ namespace WeatherService
         {
             services.Configure<WeatherServiceOptions>(Configuration.GetSection("WeatherServiceOptions"));
             services.AddServiceMethodImplementation();
+            
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.Converters.Add(new StringEnumConverter
+                {
+                    NamingStrategy = new DefaultNamingStrategy()
+                });
+            });
+
+            services.AddSwaggerGenNewtonsoftSupport();
             services.AddSwaggerGen(c =>
             {
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -35,14 +45,6 @@ namespace WeatherService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherService", Version = "v1" });
 
                 c.SchemaFilter<EnumTypesSchemaFilter>(xmlPath);
-            });
-
-            services.AddControllers().AddNewtonsoftJson(o =>
-            {
-                o.SerializerSettings.Converters.Add(new StringEnumConverter
-                {
-                    NamingStrategy = new DefaultNamingStrategy()
-                });
             });
         }
 

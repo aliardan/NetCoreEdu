@@ -4,7 +4,7 @@
         <name>WeatherService</name>
     </assembly>
     <members>
-        <member name="M:WeatherService.Controllers.WeatherController.GetCityTemperature(System.String,System.String)">
+        <member name="M:WeatherService.Controllers.WeatherController.GetCityTemperature(System.String,WeatherServiceImplementation.Models.Metric)">
             <summary>
             Get the city temperature in celsius/fahrenheit
             </summary>
@@ -17,7 +17,7 @@
             </summary>
             <param name="cityName">City name - Moscow</param>
         </member>
-        <member name="M:WeatherService.Controllers.WeatherController.GetCityForecast(System.String,System.String)">
+        <member name="M:WeatherService.Controllers.WeatherController.GetCityForecast(System.String,WeatherServiceImplementation.Models.Metric)">
             <summary>
             Get the city forecast for 5 days
             </summary>

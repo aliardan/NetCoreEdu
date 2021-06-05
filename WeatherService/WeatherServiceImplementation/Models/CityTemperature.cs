@@ -1,4 +1,6 @@
-﻿namespace WeatherServiceImplementation.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WeatherServiceImplementation.Models
 {
     /// <summary>
     /// City Temperature Model

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WeatherServiceImplementation;
@@ -23,14 +22,9 @@ namespace WeatherService.Controllers
         /// <param name="cityName">City name - Moscow</param>
         /// <param name="metric">Metric in celsius/fahrenheit</param>
         [HttpGet("[controller]/temperature/{cityName}/{metric}")]
-        public async Task<ActionResult<CityTemperature>> GetCityTemperature(string cityName, string metric)
+        public async Task<CityTemperature> GetCityTemperature(string cityName, Metric metric)
         {
-            if (Enum.TryParse(metric, out Metric parsedMetric))
-            {
-                return await _weatherService.GetCityTemperature(cityName, parsedMetric);
-            }
-
-            return new StatusCodeResult(404);
+            return await _weatherService.GetCityTemperature(cityName, metric);
         }
 
         /// <summary>
@@ -49,14 +43,9 @@ namespace WeatherService.Controllers
         /// <param name="cityName">City name - Moscow</param>
         /// <param name="metric">Metric in celsius/fahrenheit</param>
         [HttpGet("[controller]/{cityName}/future/{metric}")]
-        public async Task<ActionResult<List<WeatherForecast>>> GetCityForecast(string cityName, string metric)
+        public async Task<List<WeatherForecast>> GetCityForecast(string cityName, Metric metric)
         {
-            if (Enum.TryParse(metric, out Metric parsedMetric))
-            {
-                return  await _weatherService.GetCityForecast(cityName, parsedMetric);
-            }
-
-            return new StatusCodeResult(404);
+            return  await _weatherService.GetCityForecast(cityName, metric);
         }
     }
 }
