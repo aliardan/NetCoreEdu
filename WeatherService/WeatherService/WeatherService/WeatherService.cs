@@ -17,11 +17,23 @@ namespace WeatherService.WeatherService
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly WeatherServiceOptions _options;
 
+        /// <summary>
+        /// Weather Service
+        /// </summary>
+        /// <param name="httpClientFactory">Client</param>
+        /// <param name="options">APIKey</param>
         public WeatherService(IHttpClientFactory httpClientFactory, IOptions<WeatherServiceOptions> options)
         {
             _httpClientFactory = httpClientFactory;
             _options = options.Value;
         }
+
+        /// <summary>
+        /// Get the city temperature
+        /// </summary>
+        /// <param name="cityName">City name</param>
+        /// <param name="metric">Metric in celsius/fahrenheit</param>
+        /// <returns></returns>
         public async Task<CityTemperature> GetCityTemperature(string cityName, Metric metric)
         {
             var client = _httpClientFactory.CreateClient("WeatherClient");
@@ -43,6 +55,11 @@ namespace WeatherService.WeatherService
             return result;
         }
 
+        /// <summary>
+        /// Get the city wind direction and speed
+        /// </summary>
+        /// <param name="cityName">City name</param>
+        /// <returns></returns>
         public async Task<CityWind> GetCityWind(string cityName)
         {
             var client = _httpClientFactory.CreateClient("WeatherClient");
@@ -54,12 +71,18 @@ namespace WeatherService.WeatherService
             {
                 City = cityName,
                 Speed = res.wind.speed,
-                Direction = toTextuallDescription(res.wind.deg)
+                Direction = ToTextuallDescription(res.wind.deg)
             };
 
             return result;
         }
 
+        /// <summary>
+        /// Get the city forecast for 5 days
+        /// </summary>
+        /// <param name="cityName">City name</param>
+        /// <param name="metric">Metric in celsius/fahrenheit</param>
+        /// <returns></returns>
         public async Task<List<WeatherForecast>> GetCityForecast(string cityName, Metric metric)
         {
             var client = _httpClientFactory.CreateClient("WeatherClient");
@@ -91,7 +114,7 @@ namespace WeatherService.WeatherService
             return Math.Round((temperature - 273.15) * 9 / 5 + 32, 2);
         }
 
-        private Direction toTextuallDescription(double degree)
+        private Direction ToTextuallDescription(double degree)
         {
             return degree switch
             {

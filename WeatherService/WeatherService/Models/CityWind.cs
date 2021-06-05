@@ -16,7 +16,7 @@
         public double Speed { get; set; }
 
         /// <summary>
-        /// City wind direction
+        /// Wind direction
         /// </summary>
         public Direction Direction { get; set; }
     }
