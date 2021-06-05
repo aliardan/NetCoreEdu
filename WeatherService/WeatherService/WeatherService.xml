@@ -4,5 +4,95 @@
         <name>WeatherService</name>
     </assembly>
     <members>
+        <member name="T:WeatherService.Models.CityWind">
+            <summary>
+            City Wind Model
+            </summary>
+        </member>
+        <member name="P:WeatherService.Models.CityWind.City">
+            <summary>
+            City name
+            </summary>
+        </member>
+        <member name="P:WeatherService.Models.CityWind.Speed">
+            <summary>
+            City wind speed
+            </summary>
+        </member>
+        <member name="P:WeatherService.Models.CityWind.Direction">
+            <summary>
+            City wind direction
+            </summary>
+        </member>
+        <member name="T:WeatherService.Models.Direction">
+            <summary>
+            Wind Direction Model
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Direction.North">
+            <summary>
+            North wind direction
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Direction.East">
+            <summary>
+            East wind direction
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Direction.South">
+            <summary>
+            South wind direction
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Direction.West">
+            <summary>
+            West wind direction
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Direction.Northeast">
+            <summary>
+            Northeast wind direction
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Direction.Southeast">
+            <summary>
+            Southeast wind direction
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Direction.Southwest">
+            <summary>
+            Southwest wind direction
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Direction.Northwest">
+            <summary>
+            Northwest wind direction
+            </summary>
+        </member>
+        <member name="T:WeatherService.Models.Metric">
+            <summary>
+            Kind of metric
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Metric.celsius">
+            <summary>
+            Сelsius Metric
+            </summary>
+        </member>
+        <member name="F:WeatherService.Models.Metric.fahrenheit">
+            <summary>
+            Fahrenheit Metric
+            </summary>
+        </member>
+        <member name="T:WeatherService.WeatherService.Models.Main">
+            <summary>
+            Main model
+            </summary>
+        </member>
+        <member name="P:WeatherService.WeatherService.Models.Main.temp">
+            <summary>
+            Temperature
+            </summary>
+        </member>
     </members>
 </doc>

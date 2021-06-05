@@ -4,7 +4,7 @@ namespace WeatherService.Models
 {
     public class WeatherForecast
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public string City { get; set; }
 
