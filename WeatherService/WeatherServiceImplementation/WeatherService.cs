@@ -1,17 +1,17 @@
-﻿using Microsoft.Extensions.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WeatherService.Models;
-using WeatherService.WeatherService.Models;
+using Microsoft.Extensions.Options;
+using WeatherServiceImplementation.Models;
+using WeatherServiceImplementation.OpenWeatherMapApiModels;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace WeatherService.WeatherService
+namespace WeatherServiceImplementation
 {
-    public class WeatherService
+    internal class WeatherService : IWeatherService
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly WeatherServiceOptions _options;

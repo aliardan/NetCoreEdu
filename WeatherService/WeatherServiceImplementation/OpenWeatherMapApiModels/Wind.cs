@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace WeatherService.WeatherService.Models
+namespace WeatherServiceImplementation.OpenWeatherMapApiModels
 {
     /// <summary>
     /// Wind model
     /// </summary>
-    public class Wind
+    internal class Wind
     {
         /// <summary>
         /// Wind speed

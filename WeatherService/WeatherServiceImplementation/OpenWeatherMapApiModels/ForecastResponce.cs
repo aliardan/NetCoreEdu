@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace WeatherService.WeatherService.Models
+namespace WeatherServiceImplementation.OpenWeatherMapApiModels
 {
     /// <summary>
     /// Weather forecast for 5 days responce
     /// </summary>
-    public class ForecastResponce
+    internal class ForecastResponce
     {
         /// <summary>
         /// Forecast list
@@ -18,7 +18,7 @@ namespace WeatherService.WeatherService.Models
     /// <summary>
     /// List items model
     /// </summary>
-    public class ListItem
+    internal class ListItem
     {
         /// <summary>
         /// DateTime

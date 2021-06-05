@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WeatherService.Models;
+using WeatherServiceImplementation;
+using WeatherServiceImplementation.Models;
 
 namespace WeatherService.Controllers
 {
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        private readonly WeatherService.WeatherService _weatherService;
+        private readonly IWeatherService _weatherService;
 
-        public WeatherController(WeatherService.WeatherService weatherService)
+        public WeatherController(IWeatherService weatherService)
         {
             _weatherService = weatherService;
         }

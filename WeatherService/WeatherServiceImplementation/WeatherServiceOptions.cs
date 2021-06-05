@@ -1,4 +1,4 @@
-﻿namespace WeatherService.WeatherService
+﻿namespace WeatherServiceImplementation
 {
     public class WeatherServiceOptions
     {

@@ -16,4 +16,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherServiceImplementation\WeatherServiceImplementation.csproj" />
+  </ItemGroup>
+
 </Project>

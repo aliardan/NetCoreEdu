@@ -1,4 +1,4 @@
-﻿namespace WeatherService.Models
+﻿namespace WeatherServiceImplementation.Models
 {
     /// <summary>
     /// Weather forecast for 5 days

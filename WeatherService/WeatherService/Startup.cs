@@ -9,7 +9,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.IO;
 using System.Reflection;
-using WeatherService.WeatherService;
+using WeatherServiceImplementation;
 
 namespace WeatherService
 {
@@ -26,9 +26,7 @@ namespace WeatherService
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<WeatherServiceOptions>(Configuration.GetSection("WeatherServiceOptions"));
-            services.AddHttpClient();
-            services.AddTransient<WeatherService.WeatherService>();
-
+            services.AddServiceMethodImplementation();
             services.AddSwaggerGen(c =>
             {
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

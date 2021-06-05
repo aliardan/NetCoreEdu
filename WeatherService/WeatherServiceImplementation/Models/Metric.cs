@@ -1,4 +1,4 @@
-﻿namespace WeatherService.Models
+﻿namespace WeatherServiceImplementation.Models
 {
     /// <summary>
     /// Kind of metric

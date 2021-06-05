@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace WeatherService.WeatherService.Models
+namespace WeatherServiceImplementation.OpenWeatherMapApiModels
 {
     /// <summary>
     /// Main model
     /// </summary>
-    public class Main
+    internal class Main
     {
         /// <summary>
         /// Temperature
