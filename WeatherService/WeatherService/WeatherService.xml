@@ -8,20 +8,20 @@
             <summary>
             Get the city temperature in celsius/fahrenheit
             </summary>
-            <param name="cityName">City name - Moscow</param>
+            <param name="cityName">City name</param>
             <param name="metric">Metric in celsius/fahrenheit</param>
         </member>
         <member name="M:WeatherService.Controllers.WeatherController.GetCityWind(System.String)">
             <summary>
             Get the city wind direction and speed
             </summary>
-            <param name="cityName">City name - Moscow</param>
+            <param name="cityName">City name</param>
         </member>
         <member name="M:WeatherService.Controllers.WeatherController.GetCityForecast(System.String,WeatherServiceImplementation.Models.Metric)">
             <summary>
             Get the city forecast for 5 days
             </summary>
-            <param name="cityName">City name - Moscow</param>
+            <param name="cityName">City name</param>
             <param name="metric">Metric in celsius/fahrenheit</param>
         </member>
     </members>
