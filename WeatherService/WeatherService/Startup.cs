@@ -11,8 +11,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
+using WeatherService.WeatherService;
 
 namespace WeatherService
 {
@@ -29,13 +33,23 @@ namespace WeatherService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<WeatherService.WeatherService>();
-            services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherService", Version = "v1" });
+
+                c.SchemaFilter<EnumTypesSchemaFilter>(xmlPath);
+            });
+
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.Converters.Add(new StringEnumConverter
+                {
+                    NamingStrategy = new DefaultNamingStrategy()
+                });
             });
         }
 
